@@ -1,5 +1,7 @@
 package com.example.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -30,6 +32,11 @@ public class TeamRepository {
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
 		
 		return template.queryForObject(sql, param, TEAM_ROW_MAPPER);
+	}
+	
+	public List<Team> findAll() {
+		String sql = "SELECT * FROM teams ORDER BY inauguration asc ;";
+		return template.query(sql,TEAM_ROW_MAPPER);
 	}
 	
 }
