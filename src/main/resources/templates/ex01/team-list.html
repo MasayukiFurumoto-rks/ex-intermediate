@@ -6,6 +6,7 @@
 </head>
 <body>
 <h3>野球チーム一覧</h3>
+<div th:if="${alert}!=null" th:text="${alert}"></div>
 <div th:each="team,status:${teamList}">
 <a th:href="@{/ex01/show-detail?id=}+${team.id}" th:text="${team.teamName}" ></a><br>
 <br>

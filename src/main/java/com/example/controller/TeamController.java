@@ -20,7 +20,11 @@ public class TeamController {
 	@RequestMapping("")
 	public String showList(Model model) {
 		List<Team> teamList = service.showList();
-		model.addAttribute("teamList",teamList);
+		if(teamList.size() == 0) {
+			model.addAttribute("alert","1件もデータが存在しません");
+		}else {
+			model.addAttribute("teamList",teamList);
+		}
 		return "/ex01/team-list";
 	}
 	
