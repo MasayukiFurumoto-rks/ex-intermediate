@@ -23,10 +23,10 @@ public class HotelRepository {
 	@Autowired
 	private NamedParameterJdbcTemplate template;
 
-	private final RowMapper<Hotel> HOTEL_ROW_MAPPER = new BeanPropertyRowMapper<Hotel>();
+	private final RowMapper<Hotel> HOTEL_ROW_MAPPER = new BeanPropertyRowMapper<>(Hotel.class);
 
 	/**
-	 * @param price フォームに入力された価格です。もし入力されていなければサービスクラスで上限の300000円が渡されます。
+	 * @param price フォームに入力された価格です。もし入力されていなければ上限の300000円が渡されます。
 	 * @return 入力された価格以下の価格を持つホテルのリストを返します。
 	 * 
 	 */

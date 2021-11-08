@@ -23,14 +23,11 @@ public class HotelService {
 	private HotelRepository repository;
 
 	/**
-	 * @param price　フォームに入力された価格です。もし入力されていなければ上限の300000円をレポジトリクラスに渡します。
+	 * @param price　フォームに入力された価格です。もし入力されていなければ上限の300000円が渡されます。
 	 * @return　入力された価格以下の価格を持つホテルのリストを返します。
 	 * 
 	 */
 	public List<Hotel> searchByLessThanPrice(Integer price) {
-		if (price == null) {
-			return repository.searchByLessThanPrice(300000);
-		}
 		return repository.searchByLessThanPrice(price);
 	}
 

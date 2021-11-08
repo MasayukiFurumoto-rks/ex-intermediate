@@ -6,15 +6,15 @@
 </head>
 <body>
 	<h2>ホテル検索</h2>
-	<form th:action="@" th:object="${}">
+	<form th:action="@{/ex02/searching}" th:object="${hotelForm}">
 		<input type="text" th:field="*{price}">円以下<br>
 		<button>検索</button>
 	</form>
 <br>
 <div class="results">
 	<table class="results">
-		<tr>
-			<td th:each="${}">
+		<tr th:each="hotel:${resultList}">
+			<td>
 				<table border=1>
 					<tr>
 						<th>ホテル名</th>
@@ -26,7 +26,7 @@
 					</tr>
 					<tr>
 						<th>価格</th>
-						<td th:text="#Numbers.formatInteger(1,${hotel.price},'COMMA')+円">A円</td>
+						<td th:text="${#numbers.formatInteger(hotel.price,1,'COMMA')}+円">A円</td>
 					</tr>
 				</table>
 			</td>
