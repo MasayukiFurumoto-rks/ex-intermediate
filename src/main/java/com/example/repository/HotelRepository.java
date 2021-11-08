@@ -12,18 +12,28 @@ import org.springframework.stereotype.Repository;
 
 import com.example.domain.Hotel;
 
+/**
+ * hotelsテーブルを操作するレポジトリクラスです。<br>
+ * 
+ * @author cyjoh
+ */
 @Repository
 public class HotelRepository {
 
 	@Autowired
-	private NamedParameterJdbcTemplate template ;
-	
+	private NamedParameterJdbcTemplate template;
+
 	private final RowMapper<Hotel> HOTEL_ROW_MAPPER = new BeanPropertyRowMapper<Hotel>();
-	
-	public List<Hotel> searchByLessThanPrice(Integer price){
+
+	/**
+	 * @param price フォームに入力された価格です。もし入力されていなければサービスクラスで上限の300000円が渡されます。
+	 * @return 入力された価格以下の価格を持つホテルのリストを返します。
+	 * 
+	 */
+	public List<Hotel> searchByLessThanPrice(Integer price) {
 		String sql = "SELECT * FROM hotels WHERE price <= :price ORDER BY price desc;";
-		SqlParameterSource param = new MapSqlParameterSource().addValue("price",price);
-		
-		return template.query(sql, param, HOTEL_ROW_MAPPER); 
+		SqlParameterSource param = new MapSqlParameterSource().addValue("price", price);
+
+		return template.query(sql, param, HOTEL_ROW_MAPPER);
 	}
 }
