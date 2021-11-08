@@ -1,30 +1,30 @@
 package com.example.form;
 
+import javax.validation.constraints.*;
+
+import org.hibernate.validator.constraints.Range;
+
+
 /**
  * ホテルの情報を表すドメインクラスです。<br>
  * @author cyjoh
  *
  */
 public class HotelForm {
-	/** ID */
 	private String id;
 	
-	/** エリア名 */
 	private String areaName;
 	
-	/** ホテル名 */
 	private String hotelName;
 	
-	/** 住所 */
 	private String address;
 	
-	/** 最寄駅 */
 	private String nearestStation;
 	
-	/** 価格 */
+	@Pattern(regexp="^[0-9０-９]+$",message="価格は数字のみで入力してください")
+	@Range(max=300000,min=0,message="価格は0円以上30万円以下で入力してください")
 	private String price;
 	
-	/** 駐車場有無 */
 	private String parking;
 
 	public Integer getIntPrice() {
