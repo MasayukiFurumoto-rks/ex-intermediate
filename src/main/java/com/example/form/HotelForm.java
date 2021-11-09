@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.Range;
 
 
 /**
- * hotel-search.htmlからデータを受け取るためのフォームクラスです。<br>
+ * hotel-search.htmlからデータを受け取り、エラーチェックを行うためのフォームクラスです。<br>
  * @author cyjoh
  *
  */
