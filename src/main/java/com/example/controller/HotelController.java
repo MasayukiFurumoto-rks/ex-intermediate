@@ -35,18 +35,23 @@ public class HotelController {
 	@RequestMapping("/searching")
 	public String searchByLessThanPrice(@Validated HotelForm form,BindingResult result,Model model, RedirectAttributes redirectAttributes) {
 		
-		if(result.hasErrors()) {
-			return index(model);
-		}
 		
 		List<Hotel> resultList;
 		if (form.getPrice().isEmpty()) {
 			resultList = service.searchByLessThanPrice(300000);
 		} else {
+			if(result.hasErrors()) {
+				return index(model);
+			}
 			resultList = service.searchByLessThanPrice(form.getIntPrice());
 		}
-
-		model.addAttribute("resultList", resultList);
+		
+//		データベースに1件もホテルが登録されてない場合はメッセージを表示したい
+		if(resultList.size() == 0) {
+			model.addAttribute("message", "該当するデータはありません。");
+		}else {
+			model.addAttribute("resultList", resultList);
+		}
 		return "/ex02/hotel-search";
 	}
 

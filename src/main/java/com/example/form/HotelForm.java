@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.Range;
 
 
 /**
- * ホテルの情報を表すドメインクラスです。<br>
+ * hotel-search.htmlからデータを受け取るためのフォームクラスです。<br>
  * @author cyjoh
  *
  */
@@ -21,6 +21,12 @@ public class HotelForm {
 	
 	private String nearestStation;
 	
+	/**
+	 * 価格を表すフィールド変数。
+	 * 入力文字が半角数字全角数字のみになるよう入力エラーチェック。
+	 * また、0~300000の範囲内の数値になるよう入力エラーチェック。
+	 * 
+	 */
 	@Pattern(regexp="^[0-9０-９]+$",message="価格は数字のみで入力してください")
 	@Range(max=300000,min=0,message="価格は0円以上30万円以下で入力してください")
 	private String price;
