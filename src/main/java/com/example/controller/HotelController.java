@@ -59,19 +59,10 @@ public class HotelController {
 	public String searchByLessThanPrice(@Validated HotelForm form,BindingResult result,Model model) {
 		
 		List<Hotel> resultList;
-		// フォーム入力がない場合は、300000円でサービスクラスに渡す
-		//　エラーチェックによる画面遷移はこっちでは行わない
-		if (form.getPrice().isEmpty()) {
-			resultList = service.searchByLessThanPrice(300000);
-		} else {
-		//	フォーム入力がある場合は、その価格でサービスクラスに渡す
-			// エラーチェックによる画面遷移をこっちでは行う
 			if(result.hasErrors()) {
 				return index(model);
 			}
-			//　エラーがなければ入力された価格でサービスクラスに渡す
-			resultList = service.searchByLessThanPrice(form.getIntPrice());
-		}
+			resultList = service.searchByLessThanPrice(form.getPrice());
 		
 		//	検索結果が0件の場合はメッセージを表示
 		if(resultList.size() == 0) {

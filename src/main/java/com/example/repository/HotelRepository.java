@@ -26,8 +26,20 @@ public class HotelRepository {
 	private final RowMapper<Hotel> HOTEL_ROW_MAPPER = new BeanPropertyRowMapper<>(Hotel.class);
 
 	/**
-	 * @param price フォームに入力された価格です。もし入力されていなければ上限の300000円が渡されます。
-	 * @return 入力された価格以下の価格を持つホテルのリストを返します。
+	 * hotelsデータベースに登録されているすべてのホテルのリストを価格順で返すメソッドです。<br>
+	 * 
+	 * @return List<Hotel> hotelsデータベースに登録されているすべてのホテルのリスト
+	 */
+	public List<Hotel> findAll() {
+		String sql = "SELECT * FROM hotels ORDER BY price desc;";
+		return template.query(sql, HOTEL_ROW_MAPPER);
+	}
+
+	/**
+	 * hotelsデータベースに登録されているホテルから、 入力された価格以下の価格を持つホテルのリストを価格順で返すメソッドです。<br>
+	 * 
+	 * @param price フォームに入力された価格です。
+	 * @return 入力された価格以下の価格を持つホテルのリスト
 	 * 
 	 */
 	public List<Hotel> searchByLessThanPrice(Integer price) {

@@ -23,12 +23,16 @@ public class HotelService {
 	private HotelRepository repository;
 
 	/**
-	 * @param price　フォームに入力された価格です。もし入力されていなければ上限の300000円が渡されます。
-	 * @return　入力された価格以下の価格を持つホテルのリストを返します。
+	 * @param price フォームに入力された価格です。
+	 * @return 入力された価格以下の価格を持つホテルのリストを返します。もし入力されていなければデータベースにあるホテルのリスト全件を出力します。
 	 * 
 	 */
-	public List<Hotel> searchByLessThanPrice(Integer price) {
-		return repository.searchByLessThanPrice(price);
+	public List<Hotel> searchByLessThanPrice(String price) {
+		if (price.isEmpty()) {
+			return repository.findAll();
+		} else {
+			return repository.searchByLessThanPrice(Integer.parseInt(price));
+		}
 	}
 
 }

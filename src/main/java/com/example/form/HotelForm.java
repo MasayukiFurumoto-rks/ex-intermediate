@@ -1,8 +1,6 @@
 package com.example.form;
 
-import javax.validation.constraints.*;
-
-import org.hibernate.validator.constraints.Range;
+import javax.validation.constraints.Pattern;
 
 
 /**
@@ -27,8 +25,7 @@ public class HotelForm {
 	 * また、0~300000の範囲内の数値になるよう入力エラーチェック。
 	 * 
 	 */
-	@Pattern(regexp="^[0-9０-９]+$",message="価格は数字のみで入力してください")
-	@Range(max=300000,min=0,message="価格は0円以上30万円以下で入力してください")
+	@Pattern(regexp="^$|^[0-9]|[1-9][0-9]{1,4}|[1-2][0-9]{5}|300000$",message="価格は0円以上30万円以下の数字で入力してください")
 	private String price;
 	
 	private String parking;
