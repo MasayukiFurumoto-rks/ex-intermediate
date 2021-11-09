@@ -8,7 +8,7 @@
 <body>
 	<h3>衣類検索</h3>
 	<div class="search">
-		<form th:action="@{}" method="post">
+		<form th:action="@{/ex03/searching}" method="post">
 			<table class="form">
 				<tr>
 					<th>性別</th>
@@ -17,25 +17,23 @@
 				<tr>
 					<td>
 						<table class="gender">
-							<tr>
-								<td><label><input type="radio" name="gender"
-										value="0">Man</label></td>
+							<tr th:each="gender:${application.genderMap}">
+								<td><label><input type="radio" name="gender" value="0" th:value="${gender.key}" th:text="${gender.value}" checked></label></td>
 							</tr>
-							<tr>
-								<td><label><input type="radio" name="gender"
-										value="1">Woman</label></td>
-							</tr>
+<!-- 							<tr> -->
+<!-- 								<td><label><input type="radio" name="gender" value="1">Woman</label></td> -->
+<!-- 							</tr> -->
 						</table>
 					</td>
 					<td>
 						<table class="color">
 
 							<tr>
-								<td><select>
-										<option value="赤">赤</option>
-										<option value="青">青</option>
-										<option value="白">白</option>
-										<option value="黃">黃</option>
+								<td><select name="color">
+										<option value="赤"  th:each="color:${application.colorList}" th:value="${color}" th:text="${color}">赤</option>
+<!-- 										<option value="青">青</option> -->
+<!-- 										<option value="白">白</option> -->
+<!-- 										<option value="黃">黃</option> -->
 								</select></td>
 							</tr>
 						</table>
@@ -46,8 +44,9 @@
 	</div>
 
 	<div class="result">
-		<table class="result">
-			<tr th:each="cloth:${resultList}">
+		<div th:if="${message}!=null" th:text="${message}"></div>
+		<table class="result" >
+			<tr th:each="cloth:${clothList}">
 				<td>
 					<table border=1>
 						<tr>
